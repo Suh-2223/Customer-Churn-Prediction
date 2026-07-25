@@ -54,28 +54,28 @@ Target Variable:
 ## Project Workflow
 Data Collection
         |
-        ↓
+        -->
 Exploratory Data Analysis
         |
-        ↓
+        -->
 Data Cleaning
         |
-        ↓
+       -->
 Feature Engineering
        |
-       ↓
+       -->
 Model Training
        |
-       ↓
+       -->
 Model Evaluation
        |
-       ↓
+       -->
 Model Saving
        |
-       ↓
+       -->
 Prediction Function
         |
-        ↓
+        -->
 Streamlit Application
 
 
