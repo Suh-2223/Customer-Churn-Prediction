@@ -21,7 +21,54 @@ def predict_churn(user_input):
 
     prediction = model.predict(processed_data)[0]
 
+
+    try:
+        probability = model.predict_proba(processed_data)[0][1] * 100
+    except:
+        probability = None
+
+    # Customer Status
     if prediction == 1:
-        return "Customer is likely to Churn"
+        status = "Churn"
     else:
-        return "Customer is likely to Stay"
+        status = "Stay"
+
+    # Risk Level
+    if probability is not None:
+
+        if probability < 30:
+            risk = "🟢 Low"
+
+        elif probability < 70:
+            risk = "🟡 Medium"
+
+        else:
+            risk = "🔴 High"
+
+    else:
+        risk = "Not Available"
+
+    # Recommendation
+    if prediction == 1:
+
+        recommendation = """
+• Offer a discount
+• Contact the customer
+• Provide better technical support
+• Suggest a long-term contract
+"""
+
+    else:
+
+        recommendation = """
+• Customer is satisfied
+• Continue providing quality service
+"""
+
+    return {
+        "status": status,
+        "probability": probability,
+        "risk": risk,
+        "recommendation": recommendation
+    }
+

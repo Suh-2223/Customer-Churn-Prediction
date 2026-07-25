@@ -452,29 +452,22 @@ if predict_button:
 
         result = predict_churn(customer)
 
+    
+        st.markdown("## 📊 Prediction Result")
 
-        st.markdown("### Prediction Result")
-        result_text=str(result)
-
-        if "churn" in result_text.lower():
-            st.warning(
-                "⚠️ " + result_text
-            )
-
-            st.info(
-                "💡 This customer may require a retention strategy."
-            )
-
+        if result["status"] == "Churn":
+          st.error("⚠️ Customer is likely to Churn")
         else:
+          st.success("✅ Customer is likely to Stay")
 
-            st.success(
-                "✅ " + result_text
-            )
+        if result["probability"] is not None:
+          st.write(f"**Churn Probability:** {result['probability']:.2f}%")
 
-            st.info(
-                "👍 This customer has a lower predicted churn risk."
-            )
-            
+        st.write(f"** Risk Level:** {result['risk']}")
+
+        st.write("### 💡 Recommendation")
+        st.info(result["recommendation"])
+
 
     except Exception as e:
 
